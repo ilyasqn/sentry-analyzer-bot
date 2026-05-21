@@ -5,7 +5,7 @@ import google.generativeai as genai
 from config import GEMINI_API_KEY
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-1.0-pro")
+model = genai.GenerativeModel("models/gemini-pro")
 
 PROMPT_TEMPLATE = """You are a senior backend developer. Analyze this Sentry error and explain it clearly.
 
