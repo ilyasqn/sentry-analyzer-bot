@@ -1,8 +1,7 @@
-import google.generativeai as genai
+import google.genai as genai
 from config import GEMINI_API_KEY
 
-genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 PROMPT_TEMPLATE = """You are a senior backend developer. Analyze this Sentry error and explain it clearly.
 
@@ -23,5 +22,8 @@ Reply in this exact format (short and clear, no markdown headers):
 
 def analyze(context: dict) -> str:
     prompt = PROMPT_TEMPLATE.format(**context)
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-1.5-flash",
+        contents=prompt
+    )
     return response.text.strip()

@@ -14,6 +14,11 @@ log = logging.getLogger(__name__)
 app = FastAPI()
 
 
+@app.get("/")
+def root():
+    return {"status": "ok"}
+
+
 def verify_sentry_signature(body: bytes, signature: str) -> bool:
     if not WEBHOOK_SECRET:
         return True
